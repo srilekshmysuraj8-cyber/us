@@ -1,0 +1,15 @@
+Doctor_ID,Doctor_Name,Department,Consultation_Time
+1,Dr. Alice Smith,Physician,09:00 AM - 01:00 PM
+2,Dr. Robert Brown,Physician,02:00 PM - 06:00 PM
+3,Dr. Elena Rose,Dermatologist,10:00 AM - 02:00 PM
+4,Dr. Chris Evans,Dermatologist,03:00 PM - 07:00 PM
+5,Dr. Maya Angel,Gynecologist,08:00 AM - 12:00 PM
+6,Dr. Sarah Jenkins,Gynecologist,01:00 PM - 05:00 PM
+7,Dr. Xavier Brain,Neurologist,09:00 AM - 01:00 PM
+8,Dr. Lisa Cuddy,Neurologist,02:00 PM - 06:00 PM
+9,Dr. Robert Heart,Cardiologist,10:00 AM - 02:00 PM
+10,Dr. Yang Grey,Cardiologist,03:00 PM - 07:00 PM
+11,Dr. Baby Care,Pediatrician,08:00 AM - 12:00 PM
+12,Dr. John Watson,Pediatrician,01:00 PM - 05:00 PM
+13,Dr. Look Bright,Ophthalmologist,09:00 AM - 01:00 PM
+14,Dr. Iris View,Ophthalmologist,02:00 PM - 06:00 PM

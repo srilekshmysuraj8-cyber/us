@@ -1,147 +1,25 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Montserrat', sans-serif;
-}
-
-body {
-    /* Background gradient changed to very light pink */
+body.pink-theme {
     background-color: #fce4ec;
-    background: linear-gradient(to right, #f8bbd0, #fce4ec);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    height: 100vh;
-}
-
-.container {
-    background-color: #fff;
-    border-radius: 30px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    position: relative;
-    overflow: hidden;
-    width: 768px;
-    max-width: 100%;
-    min-height: 480px;
-}
-
-/* ... keep form-container, sign-in, sign-up logic the same ... */
-
-button {
-    /* Main button color changed to Baby Pink */
-    background-color: #f06292; 
-    color: #fff;
-    font-size: 12px;
-    padding: 10px 45px;
-    border: 1px solid transparent;
-    border-radius: 8px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    margin-top: 10px;
-    cursor: pointer;
-}
-
-button.hidden {
-    background-color: transparent;
-    border-color: #fff;
-}
-
-.social-icons a {
-    /* Social icon borders changed to soft pink */
-    border: 1px solid #f8bbd0;
-    border-radius: 20%;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    margin: 10px 5px;
-    width: 40px;
-    height: 40px;
-    text-decoration: none;
-    color: #333;
-}
-
-.toggle-container {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    width: 50%;
-    height: 100%;
-    overflow: hidden;
-    transition: all 0.6s ease-in-out;
-    border-radius: 150px 0 0 100px;
-    z-index: 1000;
-}
-
-.container.active .toggle-container {
-    transform: translateX(-100%);
-    border-radius: 0 150px 100px 0;
-}
-
-.toggle {
-    /* The sliding background changed to Pink Gradient */
-    background-color: #f06292;
-    background: linear-gradient(to right, #f48fb1, #f06292);
-    color: #fff;
-    position: relative;
-    left: -100%;
-    height: 100%;
-    width: 200%;
-    transform: translateX(0);
-    transition: all 0.6s ease-in-out;
-}
-
-/* ... keep the rest of the file (toggle-panel, etc.) the same ... */
-
-/* Selection Page Styles */
-.selection-screen {
+    font-family: Arial, sans-serif;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 50px 20px;
-    background-color: #fce4ec; /* Matching Baby Pink */
-    min-height: 100vh;
+    padding: 50px;
 }
-
-.doctor-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 30px;
-    width: 100%;
-    max-width: 1000px;
-    margin-top: 40px;
-}
-
-.doctor-card {
+.card {
     background: white;
-    padding: 40px 20px;
-    border-radius: 25px;
-    text-align: center;
+    padding: 30px;
+    border-radius: 20px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-    transition: 0.3s;
-    cursor: pointer;
+    text-align: center;
+    width: 350px;
 }
-
-.doctor-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 35px rgba(240, 98, 146, 0.2);
-    border: 2px solid #f06292;
+input {
+    width: 90%; margin-bottom: 15px; padding: 10px; border: 1px solid #ccc; border-radius: 8px;
 }
-
-.doctor-card .icon {
-    font-size: 50px;
-    margin-bottom: 15px;
+button, .book-btn {
+    width: 100%; padding: 10px; background-color: #f06292; color: white; border: none; border-radius: 10px; cursor: pointer; font-weight: bold;
 }
-
-.book-btn {
-    width: 100%;
-    padding: 10px;
-    margin-top: 20px;
-    background-color: #f06292;
-    border: none;
-    border-radius: 10px;
-    color: white;
-    font-weight: bold;
-}
+button:hover { background-color: #e91e63; }
+.doctor-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; width: 100%; max-width: 800px; }
+.doctor-card { background: white; padding: 20px; border-radius: 15px; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
