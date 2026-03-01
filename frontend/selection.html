@@ -12,24 +12,64 @@
         <p>Select a category to view available doctors</p>
         
         <div class="doctor-grid">
-            <div class="doctor-card">
+            <div class="doctor-card" onclick="selectSpecialty('Physician')">
                 <div class="icon">🩺</div>
                 <h3>Physician</h3>
                 <button class="book-btn">Select</button>
             </div>
 
-            <div class="doctor-card">
+            <div class="doctor-card" onclick="selectSpecialty('Dermatologist')">
                 <div class="icon">✨</div>
                 <h3>Dermatologist</h3>
                 <button class="book-btn">Select</button>
             </div>
 
-            <div class="doctor-card">
+            <div class="doctor-card" onclick="selectSpecialty('Gynecologist')">
                 <div class="icon">👩‍⚕️</div>
                 <h3>Gynecologist</h3>
                 <button class="book-btn">Select</button>
             </div>
+            
+            <div class="doctor-card" onclick="selectSpecialty('Neurologist')">
+                <div class="icon">🥼</div>
+                <h3>Neurologist</h3>
+                <button class="book-btn">Select</button>
+            </div>
+
+            <div class="doctor-card" onclick="selectSpecialty('Cardiologist')">
+                <div class="icon">🫀</div>
+                <h3>Cardiologist</h3>
+                <button class="book-btn">Select</button>
+            </div>
+
+            <div class="doctor-card" onclick="selectSpecialty('Pediatrician')">
+                <div class="icon">🍼</div>
+                <h3>Pediatrician</h3>
+                <button class="book-btn">Select</button>
+            </div>
+
+            <div class="doctor-card" onclick="selectSpecialty('Ophthalmologist')">
+                <div class="icon">👁️</div>
+                <h3>Ophthalmologist</h3>
+                <button class="book-btn">Select</button>
+            </div>  
         </div>
     </div>
+
+    <script>
+function selectSpecialty(type) {
+    // This saves the choice so the next page knows who to show
+    localStorage.setItem('chosenSpecialty', type);
+    // This moves the user to the next page
+    window.location.href = "doctor-list.html";
+}
+</script>
+
+<script>
+function selectSpecialty(type) {
+    localStorage.setItem('chosenSpecialty', type);
+    window.location.href = "doctor-list.html";
+}
+</script>
 </body>
 </html>

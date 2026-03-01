@@ -145,3 +145,109 @@ button.hidden {
     color: white;
     font-weight: bold;
 }
+
+/* style.css */
+
+/* Matches <div class="token-3d"> */
+.token-3d {
+    width: 180px;
+    height: 180px;
+    background: linear-gradient(145deg, #ffb2c1, #f06292); /* Baby Pink Gradient */
+    border-radius: 50%;
+    /* ... other 3D styles ... */
+}
+
+/* Matches <span id="number-display"> */
+#number-display {
+    font-size: 60px;
+    font-weight: bold;
+    color: #f06292;
+}
+
+/* Queue Page Container */
+.queue-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin: 20px 0;
+}
+
+/* Base Style for Every Queue Box */
+.queue-item {
+    width: 300px;
+    padding: 18px;
+    margin: 8px 0;
+    border-radius: 15px;
+    text-align: center;
+    font-weight: 700;
+    transition: all 0.4s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Arrived Status (Baby Pink) */
+.status-pink {
+    background: #fce4ec;
+    color: #f06292;
+    border: 1px solid #f8bbd0;
+    opacity: 0.8;
+}
+
+/* Not Arrived Status (Medical Red) */
+.status-red {
+    background: #ffebee;
+    color: #a51919;
+    border: 2px solid #ffcdd2;
+    opacity: 0.9;
+}
+
+/* User's Current Position (Dark Pink/Highlighted) */
+.my-pos {
+    background: #f06292;
+    color: white;
+    transform: scale(1.1);
+    box-shadow: 0 8px 20px rgba(240, 98, 146, 0.4);
+    z-index: 10;
+}
+
+/* Now Serving Header */
+.current-now {
+    background: white;
+    padding: 10px 50px;
+    border-radius: 50px;
+    border: 4px solid #f06292;
+    box-shadow: 0 4px 10px rgba(131, 206, 186, 0.05);
+}
+
+/* Animation for tokens moving up */
+.animate-up {
+    animation: slideUp 0.5s ease-out forwards;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 0.8;
+        transform: translateY(0);
+    }
+}
+
+/* Make "Now Serving" pulse when it changes */
+#serving-now {
+    transition: all 0.3s ease;
+}
+
+.current-now h1 {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); color: #f06292; }
+    100% { transform: scale(1); }
+}

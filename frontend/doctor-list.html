@@ -1,0 +1,34 @@
+<div class="selection-screen">
+    <h1 id="header">Available Doctors</h1>
+    <div id="list" class="doctor-grid"></div>
+</div>
+
+<script>
+    const category = localStorage.getItem('chosenSpecialty');
+    document.getElementById('header').innerText = category + "s Available";
+
+    fetch('doctors.json')
+        .then(res => res.json())
+        .then(data => {
+            const listDiv = document.getElementById('list');
+            // Filter: Finds the 2 doctors matching the type
+            const filtered = data.filter(d => d.type === category);
+
+            filtered.forEach(doc => {
+                listDiv.innerHTML += `
+                    <div class="doctor-card">
+                        <h3>${doc.name}</h3>
+                        <p>ID: ${doc.id}</p>
+                        <p style="color:#f06292">🕒 ${doc.time}</p>
+                        <button class="book-btn" onclick="issueToken('${doc.name}')">Get Token</button>
+                    </div>`;
+            });
+        });
+
+    function issueToken(name) {
+        localStorage.setItem('bookedDoctor', name);
+        // Generates a sequential-style random token number
+        localStorage.setItem('tokenValue', Math.floor(Math.random() * 20) + 1);
+        window.location.href = "token.html";
+    }
+</script>

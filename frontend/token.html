@@ -1,0 +1,16 @@
+<div class="selection-screen">
+    <h1>Your Appointment Token</h1>
+    <div class="token-3d"> <div class="token-center">
+            <span id="number-display">--</span>
+        </div>
+    </div>
+    <div class="token-info">
+        <h2 id="doctor-display">Doctor Name</h2>
+        <p>Token Generated Successfully</p>
+    </div>
+</div>
+
+<script>
+    document.getElementById('number-display').innerText = localStorage.getItem('tokenValue');
+    document.getElementById('doctor-display').innerText = localStorage.getItem('bookedDoctor');
+</script>
