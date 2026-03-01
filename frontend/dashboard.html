@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Live Queue</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="pink-theme">
+    <div class="card">
+        <h2 id="patient-greeting">Live Queue Dashboard</h2>
+        <div id="checkin-section">
+            <input type="text" id="booking-id-input" placeholder="Enter Booking ID">
+            <button onclick="checkIn()">I am here! (Check-In)</button>
+        </div>
+        <h1 id="wait-time-display" style="display:none; color:#f06292; font-size: 3rem;"></h1>
+        
+        <h3>Active Queue:</h3>
+        <div id="queue-list"></div>
+    </div>
+    <script src="script.js"></script>
+    <script>
+        document.getElementById('patient-greeting').innerText = `Hello, ${localStorage.getItem('patient_name')}!`;
+        setInterval(loadQueue, 5000); // Auto-refresh queue every 5 seconds
+    </script>
+</body>
+</html>
