@@ -1,0 +1,5 @@
+Booking_ID,Patient_Name,Age,Doctor_ID,Status,Estimated_Wait
+B001,John Doe,45,1,Booked,0
+B002,Jane Smith,65,1,Booked,0
+B003,Alice Brown,22,1,Booked,0
+B004,Bob White,72,1,Booked,0
