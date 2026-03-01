@@ -1,27 +1,65 @@
-<script>
-        // 1. Initial Data Setup (Combined into one logic block)
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Live Queue Status</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="selection-screen">
+        <div id="queue-main-content">
+            <div class="current-now">
+                <p>NOW SERVING</p>
+                <h1 id="serving-now">--</h1>
+            </div>
+
+            <div class="queue-container">
+                <div id="vertical-queue"></div>
+            </div>
+
+            <div class="wait-estimate">
+                <p>Estimated Wait Time</p>
+                <h2 id="time-left">-- mins</h2>
+            </div>
+        </div>
+
+        <div id="completion-screen" style="display: none;">
+            <div class="success-icon">💖</div>
+            <h1>Consultation Completed</h1>
+            <div class="advice-card">
+                <p id="random-advice"></p>
+            </div>
+            <button onclick="window.location.href='index.html'" class="book-btn">Return to Home</button>
+        </div>
+        
+        <button id="exit-btn" onclick="window.location.href='index.html'" class="back-link">Cancel / Exit</button>
+    </div>
+
+    <script>
+        // 1. Initial Data Setup
         let myToken = parseInt(localStorage.getItem('tokenValue')) || 15;
-        // Start with the doctor seeing someone 6 spots ahead
         let currentServing = myToken > 6 ? myToken - 6 : 1; 
+
+        const healthAdvice = [
+            "Health is wealth! Remember to drink at least 8 glasses of water today. 💧",
+            "Rest is just as important as medicine. Get a good night's sleep! 😴",
+            "Your smile is the best medicine, but don't forget your prescribed ones too! 😊",
+            "A walk in nature is a great way to keep your heart and mind happy. 🌿",
+            "Take a deep breath. You're doing great on your journey to wellness! ✨"
+        ];
 
         function updateQueueDisplay() {
             const queueDiv = document.getElementById('vertical-queue');
             const servingText = document.getElementById('serving-now');
             const timeText = document.getElementById('time-left');
 
-            // Update the "Now Serving" Header
             servingText.innerText = "Token #" + currentServing;
-            
-            // Clear queue for rearrangement
             queueDiv.innerHTML = ""; 
 
-            // 2. Logic: Show the 5 tokens immediately before yours
+            // 2. Show the 5 tokens before yours
             for (let i = 5; i >= 1; i--) {
                 const tokenNum = myToken - i;
-                
-                // Only show tokens that haven't been seen yet
                 if (tokenNum >= currentServing) {
-                    // SIMULATION: Tokens divisible by 4 are marked as "Not Arrived" (Red)
                     const hasArrived = (tokenNum % 4 !== 0); 
                     const statusClass = hasArrived ? "status-pink" : "status-red";
                     const label = hasArrived ? "" : " (Not Arrived)";
@@ -36,20 +74,38 @@
             // 3. Highlight Your Token
             queueDiv.innerHTML += `<div class="queue-item my-pos">Your Token: #${myToken}</div>`;
 
-            // 4. Update Time Estimate (10 mins per patient)
+            // 4. Update Time Estimate
             const patientsAhead = myToken - currentServing;
             timeText.innerText = (patientsAhead * 10) + " Minutes";
 
-            // 5. Check if it is the user's turn
+            // 5. CHECK FOR COMPLETION
             if (currentServing === myToken) {
-                servingText.innerText = "IT'S YOUR TURN!";
-                timeText.innerText = "0 Minutes";
-                clearInterval(queueInterval); // Stop the timer
+                servingText.innerText = "YOU ARE WITH THE DOCTOR";
+                timeText.innerText = "In Progress...";
+                clearInterval(queueInterval); // Stop movement
+
+                // Wait 5 seconds to simulate the consultation, then show completion screen
+                setTimeout(() => {
+                    showCompletion();
+                }, 5000);
             }
         }
 
-        // 6. THE REARRANGEMENT TRIGGER
-        // Moves the queue up every 5 seconds
+        function showCompletion() {
+            // Hide queue UI
+            document.getElementById('queue-main-content').style.display = "none";
+            document.getElementById('exit-btn').style.display = "none";
+
+            // Show completion UI
+            const completionScreen = document.getElementById('completion-screen');
+            completionScreen.style.display = "block";
+
+            // Set random advice
+            const randomMsg = healthAdvice[Math.floor(Math.random() * healthAdvice.length)];
+            document.getElementById('random-advice').innerText = randomMsg;
+        }
+
+        // 6. THE TRIGGER
         const queueInterval = setInterval(() => {
             if (currentServing < myToken) {
                 currentServing++; 
@@ -57,7 +113,6 @@
             }
         }, 5000); 
 
-        // Initial call to show data immediately when page loads
         updateQueueDisplay();
     </script>
 </body>
