@@ -1,0 +1,64 @@
+<script>
+        // 1. Initial Data Setup (Combined into one logic block)
+        let myToken = parseInt(localStorage.getItem('tokenValue')) || 15;
+        // Start with the doctor seeing someone 6 spots ahead
+        let currentServing = myToken > 6 ? myToken - 6 : 1; 
+
+        function updateQueueDisplay() {
+            const queueDiv = document.getElementById('vertical-queue');
+            const servingText = document.getElementById('serving-now');
+            const timeText = document.getElementById('time-left');
+
+            // Update the "Now Serving" Header
+            servingText.innerText = "Token #" + currentServing;
+            
+            // Clear queue for rearrangement
+            queueDiv.innerHTML = ""; 
+
+            // 2. Logic: Show the 5 tokens immediately before yours
+            for (let i = 5; i >= 1; i--) {
+                const tokenNum = myToken - i;
+                
+                // Only show tokens that haven't been seen yet
+                if (tokenNum >= currentServing) {
+                    // SIMULATION: Tokens divisible by 4 are marked as "Not Arrived" (Red)
+                    const hasArrived = (tokenNum % 4 !== 0); 
+                    const statusClass = hasArrived ? "status-pink" : "status-red";
+                    const label = hasArrived ? "" : " (Not Arrived)";
+
+                    queueDiv.innerHTML += `
+                        <div class="queue-item ${statusClass} animate-up">
+                            Token #${tokenNum}${label}
+                        </div>`;
+                }
+            }
+
+            // 3. Highlight Your Token
+            queueDiv.innerHTML += `<div class="queue-item my-pos">Your Token: #${myToken}</div>`;
+
+            // 4. Update Time Estimate (10 mins per patient)
+            const patientsAhead = myToken - currentServing;
+            timeText.innerText = (patientsAhead * 10) + " Minutes";
+
+            // 5. Check if it is the user's turn
+            if (currentServing === myToken) {
+                servingText.innerText = "IT'S YOUR TURN!";
+                timeText.innerText = "0 Minutes";
+                clearInterval(queueInterval); // Stop the timer
+            }
+        }
+
+        // 6. THE REARRANGEMENT TRIGGER
+        // Moves the queue up every 5 seconds
+        const queueInterval = setInterval(() => {
+            if (currentServing < myToken) {
+                currentServing++; 
+                updateQueueDisplay(); 
+            }
+        }, 5000); 
+
+        // Initial call to show data immediately when page loads
+        updateQueueDisplay();
+    </script>
+</body>
+</html>

@@ -4,10 +4,78 @@
     <title>Select Doctor</title>
     <link rel="stylesheet" href="style.css">
 </head>
+<<<<<<< HEAD
 <body class="pink-theme">
     <h1>Select a Specialist</h1>
     <div id="doctor-grid" class="doctor-grid"></div>
     <script src="script.js"></script>
     <script>loadDoctors();</script>
+=======
+<body>
+    <div class="selection-screen">
+        <h1>Which specialist do you need?</h1>
+        <p>Select a category to view available doctors</p>
+        
+        <div class="doctor-grid">
+            <div class="doctor-card" onclick="selectSpecialty('Physician')">
+                <div class="icon">🩺</div>
+                <h3>Physician</h3>
+                <button class="book-btn">Select</button>
+            </div>
+
+            <div class="doctor-card" onclick="selectSpecialty('Dermatologist')">
+                <div class="icon">✨</div>
+                <h3>Dermatologist</h3>
+                <button class="book-btn">Select</button>
+            </div>
+
+            <div class="doctor-card" onclick="selectSpecialty('Gynecologist')">
+                <div class="icon">👩‍⚕️</div>
+                <h3>Gynecologist</h3>
+                <button class="book-btn">Select</button>
+            </div>
+            
+            <div class="doctor-card" onclick="selectSpecialty('Neurologist')">
+                <div class="icon">🥼</div>
+                <h3>Neurologist</h3>
+                <button class="book-btn">Select</button>
+            </div>
+
+            <div class="doctor-card" onclick="selectSpecialty('Cardiologist')">
+                <div class="icon">🫀</div>
+                <h3>Cardiologist</h3>
+                <button class="book-btn">Select</button>
+            </div>
+
+            <div class="doctor-card" onclick="selectSpecialty('Pediatrician')">
+                <div class="icon">🍼</div>
+                <h3>Pediatrician</h3>
+                <button class="book-btn">Select</button>
+            </div>
+
+            <div class="doctor-card" onclick="selectSpecialty('Ophthalmologist')">
+                <div class="icon">👁️</div>
+                <h3>Ophthalmologist</h3>
+                <button class="book-btn">Select</button>
+            </div>  
+        </div>
+    </div>
+
+    <script>
+function selectSpecialty(type) {
+    // This saves the choice so the next page knows who to show
+    localStorage.setItem('chosenSpecialty', type);
+    // This moves the user to the next page
+    window.location.href = "doctor-list.html";
+}
+</script>
+
+<script>
+function selectSpecialty(type) {
+    localStorage.setItem('chosenSpecialty', type);
+    window.location.href = "doctor-list.html";
+}
+</script>
+>>>>>>> 8d8f3ff15c71de7cff7692d631af6061acbdc6bf
 </body>
 </html>

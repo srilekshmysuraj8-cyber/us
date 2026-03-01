@@ -1,0 +1,16 @@
+[
+  { "id": 1, "name": "Dr. Alice Smith", "type": "Physician", "time": "09:00 AM - 01:00 PM" },
+  { "id": 2, "name": "Dr. Robert Brown", "type": "Physician", "time": "02:00 PM - 06:00 PM" },
+  { "id": 3, "name": "Dr. Elena Rose", "type": "Dermatologist", "time": "10:00 AM - 02:00 PM" },
+  { "id": 4, "name": "Dr. Chris Evans", "type": "Dermatologist", "time": "03:00 PM - 07:00 PM" },
+  { "id": 5, "name": "Dr. Maya Angel", "type": "Gynecologist", "time": "08:00 AM - 12:00 PM" },
+  { "id": 6, "name": "Dr. Sarah Jenkins", "type": "Gynecologist", "time": "01:00 PM - 05:00 PM" },
+  { "id": 7, "name": "Dr. Xavier Brain", "type": "Neurologist", "time": "09:00 AM - 01:00 PM" },
+  { "id": 8, "name": "Dr. Lisa Cuddy", "type": "Neurologist", "time": "02:00 PM - 06:00 PM" },
+  { "id": 9, "name": "Dr. Robert Heart", "type": "Cardiologist", "time": "10:00 AM - 02:00 PM" },
+  { "id": 10, "name": "Dr. Yang Grey", "type": "Cardiologist", "time": "03:00 PM - 07:00 PM" },
+  { "id": 11, "name": "Dr. Baby Care", "type": "Pediatrician", "time": "08:00 AM - 12:00 PM" },
+  { "id": 12, "name": "Dr. John Watson", "type": "Pediatrician", "time": "01:00 PM - 05:00 PM" },
+  { "id": 13, "name": "Dr. Look Bright", "type": "Ophthalmologist", "time": "09:00 AM - 01:00 PM" },
+  { "id": 14, "name": "Dr. Iris View", "type": "Ophthalmologist", "time": "02:00 PM - 06:00 PM" }
+]
