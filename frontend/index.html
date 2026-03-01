@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Program</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>My Program Front</h1>
+    <button id="runBtn">Click to Talk to Backend</button>
+    <p id="display"></p>
+
+    <script>
+        // When the button is clicked...
+        document.getElementById('runBtn').addEventListener('click', () => {
+            
+            // 1. Fetch data from the Python Laptop's address
+            fetch('http://127.0.0.1:5000/get-message')
+                .then(response => response.json())
+                .then(data => {
+                    // 2. Put the message from Python into the <p> tag
+                    document.getElementById('display').innerText = data.message;
+                });
+        });
+    </script>
+</body>
+</html>
