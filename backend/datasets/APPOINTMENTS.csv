@@ -1,0 +1,8 @@
+Booking_ID,Patient_ID,Doctor_ID,Appointment_Date,Status
+B001,P005,3,2026-03-02,Booked
+B002,P006,1,2026-03-02,Booked
+B003,P007,5,2026-03-02,Booked
+B004,P008,2,2026-03-02,Booked
+B005,P009,7,2026-03-02,Booked
+B006,P013,1,2026-03-02,Booked
+B007,P014,6,2026-03-02,Booked

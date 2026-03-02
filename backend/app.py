@@ -1,11 +1,11 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 import pandas as pd
 import joblib
 import datetime
 import os
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='../frontend', static_url_path='')
 CORS(app) # Allows your friend's frontend to connect securely!
 
 # Load the AI Model
@@ -15,13 +15,18 @@ try:
 except Exception as e:
     print("❌ Error loading AI Model. Make sure to run train_model.py first!")
 
+# --- SERVE FRONTEND ---
+@app.route('/')
+def serve_index():
+    return send_from_directory(app.static_folder, 'index.html')
+
 # --- API 1: PATIENT LOGIN ---
 @app.route('/api/login', methods=['POST'])
 def login():
     data = request.json
     df = pd.read_csv('datasets/PATIENTS.csv')
     
-    # 🚨 UPDATED LOGIC: Checking Patient_ID and Name instead of Phone/Password
+    # 🚨 UPDATED LOGIC: Checking Patient_ID and Name
     user = df[(df['Patient_ID'] == data.get('patient_id')) & (df['Name'] == data.get('name'))]
     
     if not user.empty:
@@ -33,6 +38,43 @@ def login():
         }), 200
         
     return jsonify({"status": "error", "message": "Invalid Patient ID or Name."}), 401
+
+
+# --- API 1.5: NEW PATIENT SIGN UP (UPGRADED) ---
+@app.route('/api/signup', methods=['POST'])
+def signup():
+    try:
+        data = request.json
+        df = pd.read_csv('datasets/PATIENTS.csv')
+        
+        # Generate a new Patient ID dynamically (e.g., P005)
+        new_id_num = len(df) + 1
+        new_patient_id = f"P{new_id_num:03d}"
+        
+        # Create the new user record safely using a DataFrame
+        new_user = pd.DataFrame([{
+            "Patient_ID": new_patient_id,
+            "Name": data.get('name'),
+            "Phone_Number": data.get('email'), 
+            "Age": 30 
+        }])
+        
+        # Safely append and save the CSV
+        df = pd.concat([df, new_user], ignore_index=True)
+        df.to_csv('datasets/PATIENTS.csv', index=False)
+        
+        return jsonify({
+            "status": "success", 
+            "patient_id": new_patient_id, 
+            "name": data.get('name')
+        }), 200
+
+    except PermissionError:
+        # This catches the "Excel is open" error!
+        return jsonify({"status": "error", "message": "File locked! Please close PATIENTS.csv"}), 500
+    except Exception as e:
+        return jsonify({"status": "error", "message": str(e)}), 500
+
 
 # --- API 2: GET ALL DOCTORS ---
 @app.route('/api/doctors', methods=['GET'])
@@ -105,13 +147,20 @@ def checkin():
         
     return jsonify({"status": "error", "message": "Booking ID not found."}), 404
 
-# --- API 5: GET LIVE QUEUE DASHBOARD ---
+# --- API 5: GET LIVE QUEUE DASHBOARD (UPGRADED) ---
 @app.route('/api/queue', methods=['GET'])
 def get_queue():
     df = pd.read_csv('datasets/TODAYS_QUEUE.csv')
-    # Send only the patients who are physically waiting in the hospital
-    waiting = df[df['Status'] == 'Waiting'].to_dict(orient='records')
-    return jsonify(waiting), 200
+    doctor_id = request.args.get('doctor_id') # Catch the specific doctor requested
+    
+    # Filter only people who are waiting
+    waiting = df[df['Status'] == 'Waiting']
+    
+    # If the frontend asked for a specific doctor, filter the list!
+    if doctor_id:
+        waiting = waiting[waiting['Doctor_ID'] == int(doctor_id)]
+        
+    return jsonify(waiting.to_dict(orient='records')), 200
 # --- API 6: DOCTOR COMPLETES CONSULTATION (Move the queue forward!) ---
 @app.route('/api/doctor/done', methods=['POST'])
 def doctor_done():
